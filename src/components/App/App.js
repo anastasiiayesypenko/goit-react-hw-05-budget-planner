@@ -28,16 +28,19 @@ const App = ({ budget, expenses, saveBudget, addExpense, deleteExpense }) => {
   }, [expenses]);
   return (
     <Container>
-      <BudgetForm onSave={saveBudget} />{' '}
+      <BudgetForm onSave={saveBudget} />
+
       <Values
         budget={budget}
         expenses={expencesValue}
         balance={budget - expencesValue}
-      />{' '}
-      <ExpenseForm onSave={addExpense} />{' '}
+      />
+
+      <ExpenseForm onSave={addExpense} />
+
       {expenses.length > 0 && (
         <ExpensesTable items={expenses} onRemove={deleteExpense} />
-      )}{' '}
+      )}
     </Container>
   );
 };
