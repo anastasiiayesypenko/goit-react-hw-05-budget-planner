@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '../../shared/Button';
@@ -19,26 +19,31 @@ const Table = styled.table`
   }
 `;
 
-const ExpensesTable = ({ items = [], onRemove }) => (
-  <Table>
-    <thead>
-      <tr>
-        <th> Expense name </th> <th> Expense amount </th> <th />
-      </tr>
-    </thead>
-
-    <tbody>
-      {items.map(({ id, name, amount }) => (
-        <tr key={id}>
-          <td> {name} </td> <td> {amount} </td>
-          <td>
-            <Button label="Delete" onClick={() => onRemove(id)} />
-          </td>
+const ExpensesTable = ({ items = [], onRemove }) => {
+  useEffect(() => {
+    localStorage.setItem('expensesList', JSON.stringify(items));
+  }, [items]);
+  return (
+    <Table>
+      <thead>
+        <tr>
+          <th> Expense name </th> <th> Expense amount </th> <th />
         </tr>
-      ))}
-    </tbody>
-  </Table>
-);
+      </thead>
+
+      <tbody>
+        {items.map(({ id, name, amount }) => (
+          <tr key={id}>
+            <td> {name} </td> <td> {amount} </td>
+            <td>
+              <Button label="Delete" onClick={() => onRemove(id)} />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  );
+};
 ExpensesTable.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({

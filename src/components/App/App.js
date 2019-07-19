@@ -19,16 +19,18 @@ const Container = styled.div`
 `;
 
 const App = ({ budget, expenses, saveBudget, addExpense, deleteExpense }) => {
+  const expencesValue = expenses.reduce(
+    (acc, expense) => acc + expense.amount,
+    0,
+  );
   return (
     <Container>
       <BudgetForm onSave={saveBudget} />
 
       <Values
         budget={budget}
-        expenses={expenses.reduce((acc, expense) => acc + expense.amount, 0)}
-        balance={
-          budget - expenses.reduce((acc, expense) => acc + expense.amount, 0)
-        }
+        expenses={expencesValue}
+        balance={budget - expencesValue}
       />
 
       <ExpenseForm onSave={addExpense} />
@@ -45,8 +47,8 @@ App.propTypes = {
   expenses: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      expenseName: PropTypes.string.isRequired,
-      expenseAmount: PropTypes.number.isRequired,
+      expenseName: PropTypes.string,
+      expenseAmount: PropTypes.number,
     }),
   ).isRequired,
   addExpense: PropTypes.func.isRequired,

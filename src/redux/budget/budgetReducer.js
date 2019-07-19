@@ -1,6 +1,6 @@
 import actionTypes from '../actionTypes';
 
-const initialState = 0;
+const initialState = JSON.parse(localStorage.getItem('budget')) || 0;
 
 const budgetReducer = (state = initialState, { type, payload }) => {
   switch (type) {

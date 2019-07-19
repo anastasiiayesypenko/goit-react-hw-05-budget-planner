@@ -17,11 +17,18 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ type = ' text', value, onChange = () => null, name = '' }) => (
+const Input = ({
+  type = ' text',
+  value,
+  onChange = () => null,
+  name = '',
+  placeholder = '',
+}) => (
   <StyledInput
     type={type}
     value={value}
     required
+    placeholder={placeholder}
     onChange={onChange}
     name={name}
   />
@@ -31,6 +38,7 @@ Input.defaultProps = {
 };
 Input.propTypes = {
   type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   // value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string,
