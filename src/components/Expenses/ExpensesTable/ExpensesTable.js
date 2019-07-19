@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '../../shared/Button';
@@ -20,9 +20,6 @@ const Table = styled.table`
 `;
 
 const ExpensesTable = ({ items = [], onRemove }) => {
-  useEffect(() => {
-    localStorage.setItem('expensesList', JSON.stringify(items));
-  }, [items]);
   return (
     <Table>
       <thead>

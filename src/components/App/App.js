@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BudgetForm from '../BudgetForm/BudgetForm';
@@ -23,21 +23,21 @@ const App = ({ budget, expenses, saveBudget, addExpense, deleteExpense }) => {
     (acc, expense) => acc + expense.amount,
     0,
   );
+  useEffect(() => {
+    localStorage.setItem('expensesList', JSON.stringify(expenses));
+  }, [expenses]);
   return (
     <Container>
-      <BudgetForm onSave={saveBudget} />
-
+      <BudgetForm onSave={saveBudget} />{' '}
       <Values
         budget={budget}
         expenses={expencesValue}
         balance={budget - expencesValue}
-      />
-
-      <ExpenseForm onSave={addExpense} />
-
+      />{' '}
+      <ExpenseForm onSave={addExpense} />{' '}
       {expenses.length > 0 && (
         <ExpensesTable items={expenses} onRemove={deleteExpense} />
-      )}
+      )}{' '}
     </Container>
   );
 };
